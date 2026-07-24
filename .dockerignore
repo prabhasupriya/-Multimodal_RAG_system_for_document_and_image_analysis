@@ -1,0 +1,12 @@
+.git
+.venv
+venv
+venvv
+env
+__pycache__
+*.pyc
+.pytest_cache
+.ipynb_checkpoints
+chroma_store
+extracted_images
+.env
