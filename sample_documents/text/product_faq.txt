@@ -1,0 +1,10 @@
+AcmeBot X1 - Frequently Asked Questions
+
+Q: What is the maximum payload of the AcmeBot X1?
+A: The X1 can carry up to 500 kilograms on a standard pallet.
+
+Q: How long does the battery last?
+A: A full charge provides approximately 10 hours of continuous operation under typical warehouse loads.
+
+Q: Is the X1 compatible with existing warehouse management systems?
+A: Yes. The X1 integrates via a REST API with most major WMS platforms, including SAP EWM and Manhattan Associates.

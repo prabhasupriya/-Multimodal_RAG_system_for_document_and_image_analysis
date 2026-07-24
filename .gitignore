@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Virtual environments
+venv/
+.venv/
+venvv/
+env/
+.github/workflows/venv/
+.github/
+# Secrets - never commit your real API keys
+.env
+
+# Generated at runtime - don't commit, rebuilt from sample_documents/
+chroma_store/
+extracted_images/
+
+# Jupyter
+.ipynb_checkpoints/
+evaluation_out.ipynb
+
+# Test cache
+.pytest_cache/
+
+

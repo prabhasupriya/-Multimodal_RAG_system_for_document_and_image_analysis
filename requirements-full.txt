@@ -1,0 +1,7 @@
+# Optional heavy extra: real CLIP cross-modal embeddings.
+# Install with:  pip install -r requirements.txt -r requirements-full.txt
+# Requires internet access (to download CLIP weights on first use) for any
+# actual benefit -- otherwise src/embeddings/model_loader.py falls back
+# automatically anyway, so there's no harm in leaving this uninstalled.
+sentence-transformers>=2.2.2
+torch>=2.0

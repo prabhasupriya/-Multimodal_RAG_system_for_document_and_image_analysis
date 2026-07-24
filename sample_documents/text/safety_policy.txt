@@ -1,0 +1,5 @@
+Warehouse Robot Safety Policy
+
+All autonomous mobile robots (AMRs) operating on the warehouse floor must maintain a minimum clearance of 0.5 meters from pedestrian walkways. Robots must reduce speed to under 0.3 m/s whenever a human is detected within 2 meters.
+
+Emergency stop buttons must be present on all AMR units and tested weekly. Any safety incident, including near-misses, must be logged in the incident tracker within 24 hours.

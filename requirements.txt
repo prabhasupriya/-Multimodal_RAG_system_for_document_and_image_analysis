@@ -1,0 +1,36 @@
+# Core
+numpy>=1.24
+pillow>=10.0
+python-dotenv>=1.0   # loads GROQ_API_KEY / OPENAI_API_KEY / etc. from a local .env file
+
+# Document processing
+pymupdf>=1.23        # PDF text + embedded image extraction
+pdfplumber>=0.10      # Table extraction (rows/columns preserved)
+pytesseract>=0.3.10   # OCR (requires the `tesseract-ocr` system package)
+
+# Vector database
+chromadb>=0.4.24
+
+# Generation (optional: enables real GPT-4V-class generation; falls back to
+# an offline extractive generator if not installed / no API key is set)
+openai>=1.30
+
+# API
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+pydantic>=2.6
+
+# Dev / testing / evaluation
+pytest>=8.0
+httpx>=0.27
+nbformat>=5.10
+reportlab>=4.1        # used only by scripts/generate_sample_documents.py
+
+# NOTE on embeddings: real CLIP support (sentence-transformers + torch) is
+# an OPTIONAL, heavy extra (~2GB, incl. CUDA-enabled torch) that is NOT
+# installed by default -- see requirements-full.txt. Without it, the system
+# automatically uses a lightweight, dependency-free fallback embedder (see
+# src/embeddings/model_loader.py), which keeps install + startup fast and
+# avoids a slow, doomed CLIP-weight download attempt in network-restricted
+# environments (CI, sandboxes, air-gapped deployments, etc.).

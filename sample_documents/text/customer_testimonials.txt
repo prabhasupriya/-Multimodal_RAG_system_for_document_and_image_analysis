@@ -1,0 +1,7 @@
+AcmeBot X1 - Customer Testimonials
+
+"Since deploying twelve AcmeBot X1 units in our Ohio distribution center, order picking errors have dropped by 18%." - Fulfillment Director, MidState Logistics.
+
+"The 10-hour battery life means we run a full shift without a single mid-day charging break." - Operations Manager, Northbridge Retail.
+
+"Integration with our WMS took under a week thanks to the REST API." - IT Lead, Harborview Distribution.

@@ -1,0 +1,7 @@
+Acme Robotics Inc. Company Overview
+
+Acme Robotics was founded in 2016 and specializes in autonomous warehouse robots. The company's flagship product, the AcmeBot X1, is deployed in over 200 warehouses worldwide.
+
+In fiscal year 2023, Acme Robotics reported total revenue of $48 million, a 32% increase over the prior year. The increase was driven primarily by strong demand for the X1 in the logistics sector, particularly in North America and Western Europe.
+
+The engineering team is organized into three groups: Perception, Controls, and Fleet Software. The Perception group is responsible for the computer vision stack that lets the X1 navigate cluttered warehouse aisles without human intervention.
