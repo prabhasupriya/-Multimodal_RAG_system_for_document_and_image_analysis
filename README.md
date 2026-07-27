@@ -183,3 +183,7 @@ and the API's request/response contract, source references, and latency
 behavior are identical either way. See `ARCHITECTURE.md` for details.
 ## youtude video 
 [watch here](https://youtu.be/xxQnVlfF-OE?si=qJMChjuORPzt2VnK)
+## live deployment 
+[click here](https://multimodal-rag-system-for-document-and.onrender.com/docs)
+
+
