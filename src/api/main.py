@@ -105,45 +105,45 @@ def ingest(req: IngestRequest):
 
 
 @app.post("/upload", response_model=IngestResponse)
-async def upload(files: list[UploadFile] = File(..., description="One or more PDF/PNG/JPEG/TXT files.")):
+async def upload(file: UploadFile = File(..., description="One PDF/PNG/JPEG/TXT file.")):
     """
-    Upload document file(s) directly from your own computer (via a browser
-    file picker in /docs, or any HTTP client) and ingest them immediately.
+    Upload a document file directly from your own computer (via the file
+    picker button in /docs, or any HTTP client) and ingest it immediately.
 
     This is the endpoint an end user of a *deployed* instance should use --
     unlike /ingest, it needs no access to the server's filesystem at all.
+    To add several documents, call this endpoint once per file.
     """
     os.makedirs(UPLOADED_DOCS_DIR, exist_ok=True)
 
     stats = {"files_processed": 0, "files_failed": 0, "chunks_indexed": 0}
     failed_files: list[str] = []
 
-    for upload_file in files:
-        # Strip any path components from the client-supplied filename so a
-        # malicious "../../etc/passwd"-style name can't escape the uploads
-        # directory (Zip Slip / path traversal).
-        safe_name = Path(upload_file.filename or "unnamed").name
-        ext = Path(safe_name).suffix.lower()
+    # Strip any path components from the client-supplied filename so a
+    # malicious "../../etc/passwd"-style name can't escape the uploads
+    # directory (Zip Slip / path traversal).
+    safe_name = Path(file.filename or "unnamed").name
+    ext = Path(safe_name).suffix.lower()
 
-        if ext not in SUPPORTED_UPLOAD_EXT:
-            stats["files_failed"] += 1
-            failed_files.append(f"{safe_name} (unsupported file type: {ext or 'none'})")
-            continue
+    if ext not in SUPPORTED_UPLOAD_EXT:
+        stats["files_failed"] += 1
+        failed_files.append(f"{safe_name} (unsupported file type: {ext or 'none'})")
+        return IngestResponse(**stats, total_indexed=_store.count(), failed_files=failed_files)
 
-        dest_path = Path(UPLOADED_DOCS_DIR) / safe_name
-        try:
-            contents = await upload_file.read()
-            dest_path.write_bytes(contents)
+    dest_path = Path(UPLOADED_DOCS_DIR) / safe_name
+    try:
+        contents = await file.read()
+        dest_path.write_bytes(contents)
 
-            chunks = parse_any(str(dest_path), EXTRACTED_IMAGES_DIR)
-            added = _store.add_chunks(chunks)
-            stats["chunks_indexed"] += added
-            stats["files_processed"] += 1
-            logger.info("Uploaded + ingested %s -> %d chunks", safe_name, added)
-        except Exception as exc:  # noqa: BLE001
-            stats["files_failed"] += 1
-            failed_files.append(f"{safe_name} ({exc})")
-            logger.error("Failed to ingest uploaded file %s: %s", safe_name, exc)
+        chunks = parse_any(str(dest_path), EXTRACTED_IMAGES_DIR)
+        added = _store.add_chunks(chunks)
+        stats["chunks_indexed"] += added
+        stats["files_processed"] += 1
+        logger.info("Uploaded + ingested %s -> %d chunks", safe_name, added)
+    except Exception as exc:  # noqa: BLE001
+        stats["files_failed"] += 1
+        failed_files.append(f"{safe_name} ({exc})")
+        logger.error("Failed to ingest uploaded file %s: %s", safe_name, exc)
 
     return IngestResponse(**stats, total_indexed=_store.count(), failed_files=failed_files)
 
